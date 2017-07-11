@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="${base}/resources/assets/login/assets/css/style.css">   
 <link rel="stylesheet" type="text/css" href="${base}/resources/assets/login/css/styles.css">
 <!-- Javascript -->
+<script src="${base}/resources/assets/login/js/jquery-2.1.1.min.js"></script>
+<script src="${base}/resources/assets/login/assets/js/jquery-1.8.2.min.js"></script>
 <script src="${base}/resources/assets/login/assets/js/supersized.3.2.7.min.js"></script>
 <script src="${base}/resources/assets/login/assets/js/supersized-init.js"></script>
 <script src="${base}/resources/assets/login/assets/js/scripts.js"></script>
-<script src="${base}/resources/assets/login/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 // 登录
 function check() {
@@ -23,14 +24,18 @@ function check() {
     } else {
         $.ajax({
             type : 'post',
-            url : 'login?userName=' + userName + '&password=' + password,
-            success : function(msg) {
-                if('success'==msg){
-                   
+            url : '/monitor/user/login?userName=' + userName + '&password=' + password,
+            success : function(data) {
+                if(data.success == true){
+                   window.location.href = '/monitor/dash/main';
+                   console.log("登录成功,用户名:" + data.data.userName);
                 }else{
-                   // $('#msg').html(msg);
+                   console.log(data.msg);
                 }
-            }
+            },
+        	error: function(data){
+        		console.log(data);
+        	} 
         });
     }
 }
@@ -45,7 +50,7 @@ function check() {
 				<form class="form" action="#" method="post">
 					<input type="text" id="userName" name="userName" placeholder="Username">
 					<input type="password" id="password" name="password"  placeholder="Password">
-					<button type="submit" id="login-button">Login</button>
+					<button type="button" id="login-button" onclick="check();">Login</button>
 				</form>
 			</div>
 	  	</div>

@@ -44,7 +44,7 @@ public class MD5Util {
     } 
 	
 	public static void main(String[] args) {
-		String StrMD5 = MD5("121314").toLowerCase();
+		String StrMD5 = MD5("123456").toLowerCase();
 		System.out.println(StrMD5);
 	}
 

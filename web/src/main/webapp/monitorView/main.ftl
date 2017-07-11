@@ -109,9 +109,9 @@
                             <img alt="" class="img-circle" style="background-color: #86B4DC;" src="${base}/resources/assets/img/ants_img.png">
                             <span class="username username-hide-on-mobile" id="user_name_show">
                             <#if name = 'null'>
-                                匿名神秘人
+                               	 匿名神秘人
                             <#else >
-                            ${name}
+                                 ${name}
                             </#if>
                             </span>
                         </a>
