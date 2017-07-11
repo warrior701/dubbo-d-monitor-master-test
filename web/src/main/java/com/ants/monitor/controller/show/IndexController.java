@@ -41,13 +41,14 @@ public class IndexController {
     public ModelAndView main(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute(MonitorConstants.SESSION_USER_NAME);
-        if(name == null) name = "null";
-
-        ModelAndView modelAndView = new ModelAndView("monitorView/main");
-
-        modelAndView.addObject("name", name);
-
-
+        ModelAndView modelAndView = null;
+        //登录之后才能进主页
+        if(name == null || "".equals(name)) {
+        	modelAndView = new ModelAndView("monitorView/login");
+        }else{
+        	modelAndView = new ModelAndView("monitorView/main");
+            modelAndView.addObject("name", name);
+        }
         return modelAndView;
     }
 

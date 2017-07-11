@@ -16,7 +16,7 @@
     <!-- 暴露服务协议配置 -->
     <dubbo:protocol name="dubbo" port="${dubbo.port}"/>
 
-    <!--<dubbo:monitor protocol="registry"/>-->
+    <dubbo:monitor protocol="registry"/>
 
     <!-- 暴露服务配置,超时时间60s -->
     <dubbo:service interface="com.alibaba.dubbo.monitor.MonitorService" ref="monitorService"  timeout="60000"/>
