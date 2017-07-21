@@ -47,7 +47,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="com.ants.monitor.dao.mapper"/>
-        <!--<property name="annotationClass" value="com.ants.monitor.dao.MyBatisRepository"/>-->
+    <!--     <property name="annotationClass" value="com.ants.monitor.dao.MyBatisRepository"/> -->
     </bean>
 
 

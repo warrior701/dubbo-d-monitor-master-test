@@ -24,3 +24,17 @@ CREATE TABLE `dubbo_invoke` (
   KEY `index_date` (`invoke_date`),
   KEY `index_hour` (`invoke_hour`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='存储持久化数据，保存日期为30天'
+
+-- 用户登录表
+CREATE TABLE `monitor`.`dubbo_sys_user`(  
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_name` VARCHAR(32) COMMENT '用户名',
+  `password` VARCHAR(32) COMMENT '密码(MD5)',
+  `status` CHAR(2) COMMENT '状态 00：删除 01：正常',
+  `create_by` VARCHAR(32) COMMENT '创建人',
+  `update_by` VARCHAR(32) COMMENT '更新人',
+  `create_date` DATETIME COMMENT '创建时间',
+  `update_date` DATETIME COMMENT '更新时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=INNODB CHARSET=utf8mb4
+COMMENT='用户表';
