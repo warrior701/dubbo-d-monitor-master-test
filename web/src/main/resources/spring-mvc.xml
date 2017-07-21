@@ -71,7 +71,15 @@
         <property name="exposeSessionAttributes" value="true"/>
         <property name="order" value="2"/>
     </bean>
-
+    
+    <!--springMVC拦截器-->
+    <mvc:interceptors>  
+        <!-- 多个拦截器，顺序执行 -->  
+        <mvc:interceptor>  
+            <mvc:mapping path="/**"/>  
+            <bean class="com.ants.monitor.interceptor.LoginInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>
 
 
 

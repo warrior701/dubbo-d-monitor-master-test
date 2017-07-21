@@ -42,13 +42,8 @@ public class IndexController {
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute(MonitorConstants.SESSION_USER_NAME);
         ModelAndView modelAndView = null;
-        //登录之后才能进主页
-        if(name == null || "".equals(name)) {
-        	modelAndView = new ModelAndView("monitorView/login");
-        }else{
-        	modelAndView = new ModelAndView("monitorView/main");
-            modelAndView.addObject("name", name);
-        }
+    	modelAndView = new ModelAndView("monitorView/main");
+        modelAndView.addObject("name", name);
         return modelAndView;
     }
 
@@ -59,9 +54,7 @@ public class IndexController {
 
         Integer appSum = applicationService.getAllApplications().size();
         Integer serviceSum = servicesService.getAllServicesString().size();
-
         Integer hostSum = hostService.getHostBOMap().keySet().size();
-
         String nowMonth = TimeUtil.getYearMonthString(new Date());
 
         modelAndView.addObject("appSum", appSum);
