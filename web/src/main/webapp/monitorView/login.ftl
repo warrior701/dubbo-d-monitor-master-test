@@ -30,7 +30,7 @@ function check() {
                    window.location.href = '/monitor/dash/main';
                    console.log("登录成功,用户名:" + data.data.userName);
                 }else{
-                   console.log(data.msg);
+                   alert(data.msg);
                 }
             },
         	error: function(data){
