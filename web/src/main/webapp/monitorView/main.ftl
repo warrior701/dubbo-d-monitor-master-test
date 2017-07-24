@@ -161,6 +161,12 @@
                         <span class="title">Hosts-主机</span>
                     </a>
                 </li>
+                <li class="gotoIfreame" id="serviceButton">
+                    <a href="#" data-url="/monitor/user/main">
+                        <i class="icon-calendar"></i>
+                        <span class="title">用户管理</span>
+                    </a>
+                </li>
 
             </ul>
             <!-- END SIDEBAR MENU -->

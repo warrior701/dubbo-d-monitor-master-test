@@ -1,3 +1,7 @@
+-- 创建数据库
+CREATE DATABASE `monitor` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+-- 创建持久化数据表
 CREATE TABLE `dubbo_invoke` (
   `uu_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'uuid,唯一主键',
   `application` varchar(255) NOT NULL DEFAULT '' COMMENT 'application名称',
@@ -26,7 +30,7 @@ CREATE TABLE `dubbo_invoke` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='存储持久化数据，保存日期为30天'
 
 -- 用户登录表
-CREATE TABLE `monitor`.`dubbo_sys_user`(  
+CREATE TABLE `dubbo_sys_user`(  
   `user_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_name` VARCHAR(32) COMMENT '用户名',
   `password` VARCHAR(32) COMMENT '密码(MD5)',
@@ -38,3 +42,28 @@ CREATE TABLE `monitor`.`dubbo_sys_user`(
   PRIMARY KEY (`user_id`)
 ) ENGINE=INNODB CHARSET=utf8mb4
 COMMENT='用户表';
+
+-- 修改
+ALTER TABLE `monitor`.`dubbo_sys_user`   
+  CHANGE `status` `status` CHAR(2) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '01' NULL COMMENT '状态 00：删除 01：正常';
+  
+-- 插入初始管理员账号
+INSERT INTO `monitor`.`dubbo_sys_user` (
+  `user_name`,
+  `password`,
+  `status`,
+  `create_by`,
+  `update_by`,
+  `create_date`,
+  `update_date`
+)
+VALUES
+  (
+    'admin',
+    'e10adc3949ba59abbe56e057f20f883e',
+    '01',
+    'admin',
+    'admin',
+    '2017-07-24 14:25:33',
+    '2017-07-24 14:25:33'
+  );

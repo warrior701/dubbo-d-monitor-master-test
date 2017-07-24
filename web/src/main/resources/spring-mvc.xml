@@ -76,11 +76,20 @@
     <mvc:interceptors>  
         <!-- 多个拦截器，顺序执行 -->  
         <mvc:interceptor>  
-            <mvc:mapping path="/**"/>  
+            <mvc:mapping path="/**"/> 
+            <!-- 静态资源不过滤  --> 
+            <mvc:exclude-mapping path="/**/fonts/*"/>
+		    <mvc:exclude-mapping path="/**/*.css"/>
+		    <mvc:exclude-mapping path="/**/*.js"/>
+		    <mvc:exclude-mapping path="/**/*.png"/>
+		    <mvc:exclude-mapping path="/**/*.gif"/>
+		    <mvc:exclude-mapping path="/**/*.jpg"/>
+		    <mvc:exclude-mapping path="/**/*.jpeg"/>
+		    <mvc:exclude-mapping path="/**/*.ftl"/>
+		    <mvc:exclude-mapping path="/**/*.ico"/>
+		    <mvc:exclude-mapping path="/resources/**"/>
             <bean class="com.ants.monitor.interceptor.LoginInterceptor"></bean>  
         </mvc:interceptor>  
     </mvc:interceptors>
-
-
 
 </beans>

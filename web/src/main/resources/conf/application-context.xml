@@ -17,7 +17,7 @@
     <import resource="application-mybatis.xml"/>
 
     <!--mybatis  事务配置-->
-    <!--<import resource="application-transaction.xml"/>-->
+    <import resource="application-transaction.xml"/>
 
     <!--dubbo-->
     <import resource="application-dubbo.xml"/>

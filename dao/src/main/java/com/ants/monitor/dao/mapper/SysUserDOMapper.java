@@ -1,5 +1,7 @@
 package com.ants.monitor.dao.mapper;
 
+import java.util.List;
+
 import com.ants.monitor.bean.entity.SysUserDO;
 
 public interface SysUserDOMapper {
@@ -50,4 +52,25 @@ public interface SysUserDOMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SysUserDO record);
+    
+    /**
+     * 根据用户名查询用户
+     * @param userName
+     * @return
+     */
+    SysUserDO selectByUserName(String userName);
+    
+    /**
+     * 根据条件查询用户列表
+     * @param userName
+     * @return
+     */
+    List<SysUserDO> selectList(SysUserDO user);
+    
+    /**
+     * 根据条件查询用户个数
+     * @param user
+     * @return
+     */
+    int selectListCount(SysUserDO user);
 }
