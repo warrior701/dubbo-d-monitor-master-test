@@ -8,7 +8,6 @@ var allUserResutMap = undefined;
 $(function () {
     initData();
     buttonClick();
-    othersClick();
     inputFunction();
     selectFunction();
 });
@@ -38,44 +37,47 @@ function initData() {
     $('#stopUserSumNumber').html(allUserResutMap.stopUserSum);
 
     // 拼接所有app数据
-    var noHtml = '<span class="badge badge-danger">无</span>';
-    var numberHtml = '<span class="badge badge-success">NUMBER</span>';
-    var providers_category_html = '<span class="badge badge-danger providers">提供者</span>';
-    var consumers_category_html = '<span class="badge badge-success consumers">消费者</span>';
+    var edit_html = '<button type="button" class="btn btn-info btn-sm" onclick="editUser(USERID)">编辑</button>';
+    var delete_html = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteUser(USERID)">删除</button>';
+    var empty_html = '&nbsp;&nbsp;&nbsp;&nbsp;';
 
     var userList = allUserResutMap.userList;
     var map = {
         list: userList,
-        categoryFunc: function () {
-            var categoty_html = '';
-            var isProvider = this.isProvider;
-            var isConsumer = this.isConsumer;
-            if (isProvider) categoty_html += providers_category_html;
-            if (isConsumer) categoty_html += consumers_category_html;
-            return categoty_html;
+        statusFunc: function () {
+            if(this.status == "00"){
+            	return '停用';
+            }else if(this.status == "01"){
+            	return '正常';
+            }else{
+            	return '未知';
+            }
         },
-        serviceSumFunc: function () {
-            var sum = Number(this.serviceSum);
-            if (sum == 0) return noHtml;
-            return numberHtml.replace('NUMBER', sum);
-        },
-        providerSumFunc: function () {
-            var sum = Number(this.providerSum);
-            if (sum == 0) return noHtml;
-            return numberHtml.replace('NUMBER', sum);
-        },
-        consumerSumFunc: function () {
-            var sum = Number(this.consumerSum);
-            if (sum == 0) return noHtml;
-            return numberHtml.replace('NUMBER', sum);
+        operateFunc: function () {
+        	var operate_html = '';
+        	var edit_button_html = edit_html.replace('USERID', this.userId);
+        	var delete_button_html = delete_html.replace('USERID', this.userId);
+        	operate_html = edit_button_html + empty_html + delete_button_html;
+            return operate_html;
         }
     };
     var html = Mustache.render($('#main_user_list_template').html(), map);
     $("#main_user_tbody").html(html);
     Amm.changeiframeParentHeight();
-
 }
-
+//打开新增用户model
+function openAddUserModal(){
+	$("#userAddModal").modal("show");
+}
+//编辑用户
+function editUser(userId){
+	$("#userEditModal").modal("show");
+}
+//删除用户
+function deleteUser(userId){
+	$("#userDeleteModal").modal("show");
+	$("#deleteId").val(userId);
+}
 function buttonClick() {
     $(".reload").click(function () {
         $('#search_user_btn').trigger('click');
@@ -167,28 +169,6 @@ function filterUserTable() {
 }
 
 
-function rankingFunctionHelp(resultList){
-    var firstIndexHtml = '<div class="label label-best label-danger"> <i class="fa fa-trophy"></i>&nbsp;INDEX</div>';
-    var otherIndexHtml = '<span class="primary-link">INDEX </span>';
-
-    var indexs = 0;
-    var map = {
-        list:resultList,
-        indexFunc: function () {
-            var html = "";
-            indexs += 1;
-            if(indexs < 4){
-                html = firstIndexHtml.replace("INDEX",indexs);
-            }else{
-                html = otherIndexHtml.replace("INDEX",indexs);
-            }
-            return html;
-        }
-    };
-    var rank_html = Mustache.render($('#method_rank_template').html(), map);
-    $("#ranking_body").html(rank_html);
-
-}
 
 
 

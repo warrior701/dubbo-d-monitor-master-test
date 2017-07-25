@@ -6,7 +6,7 @@
             <span class="primary-link">{{userName}}</span>
         </td>
         <td>
-            {{{status}}}
+            {{{statusFunc}}}
         </td>
         <td>
             {{createBy}}
@@ -21,7 +21,7 @@
             {{{updateDate}}}
         </td>
         <td>
-         
+         	{{{operateFunc}}}
         </td>
 
     </tr>
