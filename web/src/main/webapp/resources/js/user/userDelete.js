@@ -10,7 +10,7 @@ $(function() {
 
 //删除用户事件
 function userDelete() {
-	var deleteId = $("#deleteId").val;
+	var deleteId = $("#deleteId").val();
 	alert(deleteId);
 	$("#successMsg").css("display", "block");
 	setTimeout(function(){
