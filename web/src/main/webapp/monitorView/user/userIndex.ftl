@@ -78,8 +78,7 @@
 	<#--自定义公用的js-->
 	<script src="${base}/resources/assets/main/js/amm.js" type="text/javascript"></script>
 	<#include "/monitorView/user/userIndex_template.ftl" />
-	<#include "/monitorView/user/userAdd.ftl" />
-	<#include "/monitorView/user/userDelete.ftl" />
+	
 	<script>
 	    jQuery(document).ready(function () {
 	        Metronic.init();

@@ -105,3 +105,18 @@ var alertContent = function (content, heard_html, width) {
 function logout(){
 	window.location.href = '/monitor/user/logout';
 }
+
+
+//打开新增用户model
+function openAddUserModal(){
+	$("#userAddModal").modal("show");
+}
+//编辑用户
+function editUser(userId){
+	$("#userEditModal").modal("show");
+}
+//删除用户
+function deleteUser(userId){
+	$("#userDeleteModal").modal("show");
+	$("#deleteId").val(userId);
+}

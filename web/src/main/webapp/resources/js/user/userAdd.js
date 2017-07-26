@@ -1,8 +1,8 @@
 $(function() {
 	// 在调用 show 方法后触发
 	$('#userAddModal').on('show.bs.modal', function() {
-		$("#errMsg").css("display", "none");
-		$("#successMsg").css("display", "none");
+		$("#addErrMsg").css("display", "none");
+		$("#addSuccessMsg").css("display", "none");
 	})
 });
 
@@ -22,7 +22,7 @@ function changeStatus(status) {
 
 //新建用户事件
 function userAdd() {
-	$("#successMsg").css("display", "block");
+	$("#addSuccessMsg").css("display", "block");
 	setTimeout(function(){
 		$('#userAddModal').modal('hide')
 	}, 2000)

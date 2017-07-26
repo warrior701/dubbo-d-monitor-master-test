@@ -1,8 +1,8 @@
 $(function() {
 	// 在调用 show 方法后触发
 	$('#userDeleteModal').on('show.bs.modal', function() {
-		$("#errMsg").css("display", "none");
-		$("#successMsg").css("display", "none");
+		$("#deleteErrMsg").css("display", "none");
+		$("#deleteSuccessMsg").css("display", "none");
 	})
 });
 

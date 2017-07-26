@@ -41,8 +41,8 @@
 					<!-- <label for="name">状态</label>
 					<input type="text" class="form-control" id="name"> -->
 				</div>
-				<div id="errMsg" class="alert alert-danger">错误！请进行一些更改。</div>
-				<div id="successMsg" class="alert alert-success">操作成功，2秒后关闭</div>
+				<div id="addErrMsg" class="alert alert-danger">错误！请进行一些更改。</div>
+				<div id="addSuccessMsg" class="alert alert-success">操作成功，2秒后关闭</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

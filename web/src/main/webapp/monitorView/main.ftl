@@ -245,6 +245,8 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script src="${base}/resources/assets/main/js/metronic.js" type="text/javascript"></script>
 <script src="${base}/resources/assets/main/js/layout.js" type="text/javascript"></script>
+<#include "/monitorView/user/userAdd.ftl" />
+<#include "/monitorView/user/userDelete.ftl" />
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components

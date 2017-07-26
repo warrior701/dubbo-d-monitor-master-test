@@ -67,16 +67,15 @@ function initData() {
 }
 //打开新增用户model
 function openAddUserModal(){
-	$("#userAddModal").modal("show");
+	window.parent.window.openAddUserModal();
 }
 //编辑用户
 function editUser(userId){
-	$("#userEditModal").modal("show");
+	window.parent.window.editUser(userId);
 }
 //删除用户
 function deleteUser(userId){
-	$("#userDeleteModal").modal("show");
-	$("#deleteId").val(userId);
+	window.parent.window.deleteUser(userId);
 }
 function buttonClick() {
     $(".reload").click(function () {
