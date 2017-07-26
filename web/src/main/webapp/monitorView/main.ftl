@@ -116,6 +116,13 @@
                             </span>
                         </a>
                     </li>
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<span class="username username-hide-on-mobile" style="padding-top: 6px;" onclick="logout()">
+							退出
+                        </span>
+                        </a>
+                    </li>
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>
             </div>

@@ -100,3 +100,8 @@ var alertContent = function (content, heard_html, width) {
     //alertHeightChange();
     return false;
 };
+
+//退出系统
+function logout(){
+	window.location.href = '/monitor/user/logout';
+}

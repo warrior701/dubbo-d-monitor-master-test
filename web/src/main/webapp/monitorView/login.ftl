@@ -1,3 +1,4 @@
+<#assign base=request.contextPath />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,33 +15,7 @@
 <script src="${base}/resources/assets/login/assets/js/supersized.3.2.7.min.js"></script>
 <script src="${base}/resources/assets/login/assets/js/supersized-init.js"></script>
 <script src="${base}/resources/assets/login/assets/js/scripts.js"></script>
-<script type="text/javascript">
-// 登录
-function check() {
-    var userName = $.trim($('#userName').val());
-    var password = $.trim($('#password').val());
-    if ("" == userName || "" == password) {
-        alert('用户名或者密码不能为空');
-    } else {
-        $.ajax({
-            type : 'post',
-            url : '/monitor/user/login?userName=' + userName + '&password=' + password,
-            success : function(data) {
-                if(data.success == true){
-                   window.location.href = '/monitor/dash/main';
-                   console.log("登录成功,用户名:" + data.data.userName);
-                }else{
-                   alert(data.msg);
-                }
-            },
-        	error: function(data){
-        		console.log(data);
-        	} 
-        });
-    }
-}
-
-</script>
+<script src="${base}/resources/js/login.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="page-container">	           

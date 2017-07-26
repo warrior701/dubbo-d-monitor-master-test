@@ -3,6 +3,7 @@ package com.ants.monitor.controller.show;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +23,14 @@ import com.ants.monitor.bean.ResultVO;
 import com.ants.monitor.bean.entity.SysUserDO;
 import com.ants.monitor.biz.support.service.UserManagerService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * @author Lison
  * 
  */
+@Slf4j
 @Controller
 @RequestMapping("/monitor/user")
 public class UserController {
@@ -77,6 +81,27 @@ public class UserController {
 			e.printStackTrace();
             return ResultVO.wrapErrorResult(e.getMessage());
 		}
+    }
+    
+    /**
+     * 退出系统
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "logout")
+    public ModelAndView logout(HttpServletRequest request) {
+    	// 清除session
+		Enumeration<String> em = request.getSession().getAttributeNames();
+		log.info("========================系统退出 start=========================");
+		while (em.hasMoreElements()) {
+			String nextElement = em.nextElement().toString();
+			log.info(nextElement);
+			request.getSession().removeAttribute(nextElement);
+		}
+		request.getSession().invalidate();
+		log.info("========================系统退出 end=========================");
+		ModelAndView modelAndView = new ModelAndView("monitorView/login");
+        return modelAndView;
     }
     
     /**
