@@ -3,6 +3,7 @@ package com.ants.monitor.controller.show;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +26,7 @@ import com.ants.monitor.bean.MonitorConstants;
 import com.ants.monitor.bean.ResultVO;
 import com.ants.monitor.bean.entity.SysUserDO;
 import com.ants.monitor.biz.support.service.UserManagerService;
-
-import lombok.extern.slf4j.Slf4j;
+import com.ants.monitor.common.tools.MD5Util;
 
 
 /**
@@ -131,16 +134,63 @@ public class UserController {
                     return o1First.compareTo(o2First);
                 }
             });
-
             resultMap.put("normalUserSum", normalUserSum);
             resultMap.put("stopUserSum", stopUserSum);
             resultMap.put("userList", userList);
             return ResultVO.wrapSuccessfulResult(resultMap);
-            
         } catch (Exception e) {
             e.printStackTrace();
             return ResultVO.wrapErrorResult(e.getMessage());
         }
-
+    }
+    
+    /**
+     * 新增用户
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "addUser")
+    @ResponseBody
+    public ResultVO addUser(HttpServletRequest request, SysUserDO userInfo) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	
+    	try {
+    		if(userInfo != null && userInfo.getUserName() != null && !"".equals(userInfo.getUserName())
+        			&& userInfo.getPassword() != null && !"".equals(userInfo.getPassword())
+        			&& userInfo.getStatus() != null && !"".equals(userInfo.getStatus())){
+        		Date curDate = new Date();
+        		String curUser = request.getSession().getAttribute(MonitorConstants.SESSION_USER_NAME).toString();
+        		userInfo.setPassword(MD5Util.MD5(userInfo.getPassword()));
+        		userInfo.setCreateDate(curDate);
+        		userInfo.setUpdateDate(curDate);
+        		userInfo.setCreateBy(curUser);
+        		userInfo.setUpdateBy(curUser);
+    		    userManagerService.insert(userInfo);
+    			return ResultVO.wrapSuccessfulResult(resultMap);
+        	}else{
+        		return ResultVO.wrapErrorResult("用户名、密码、状态不能为空");
+        	}
+		} catch (Exception e) {
+			e.printStackTrace();
+            return ResultVO.wrapErrorResult(e.getMessage());
+		}
+    }
+    
+    /**
+     * 删除用户
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "deleteUser")
+    @ResponseBody
+    public ResultVO deleteUser(HttpServletRequest request,Integer Id) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	try {
+			userManagerService.deleteByPrimaryKey(Id);
+			return ResultVO.wrapSuccessfulResult(resultMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+            return ResultVO.wrapErrorResult(e.getMessage());
+		}
     }
 }

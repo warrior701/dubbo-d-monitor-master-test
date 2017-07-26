@@ -1,9 +1,10 @@
 $(function() {
-	// 在调用 show 方法后触发
-	$('#userDeleteModal').on('show.bs.modal', function() {
-		$("#deleteErrMsg").css("display", "none");
-		$("#deleteSuccessMsg").css("display", "none");
-	})
+//	// 在调用 show 方法后触发
+//	$('#userDeleteModal').on('show.bs.modal', function() {
+//		$("#deleteErrMsg").css("display", "none");
+//		$("#deleteSuccessMsg").css("display", "none");
+//	})
+
 });
 
 
@@ -12,8 +13,15 @@ $(function() {
 function userDelete() {
 	var deleteId = $("#deleteId").val();
 	alert(deleteId);
-	$("#successMsg").css("display", "block");
+	$("#deleteSuccessMsg").css("display", "block");
 	setTimeout(function(){
-		$('#userDeleteModal').modal('hide')
+		userDeleteExit();
 	}, 2000)
+}
+
+//关闭事件
+function userDeleteExit(){
+	$("#deleteErrMsg").css("display", "none");
+	$("#deleteSuccessMsg").css("display", "none");
+    $('#userDeleteModal').modal('hide');
 }
