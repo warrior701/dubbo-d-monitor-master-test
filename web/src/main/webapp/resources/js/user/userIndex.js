@@ -15,24 +15,24 @@ $(function () {
 //初始化数据
 function initData() {
 
-    if (allUserResutMap == undefined) {
-        var loadingEL = $('#user_main_body');
-        Metronic.blockUI(loadingEL);
-        $.ajax({
-            url: headerUrl + "/monitor/user/queryAllUser",
-            //同步
-            async: false,
-            success: function (resultVO) {
-                Metronic.unblockUI(loadingEL);
-                if (resultVO.success) {
-                	allUserResutMap = resultVO.data;
-                } else {
-                    $("#user_main_body").html("加载失败~！原因：" + resultVO.msg);
-                }
+//    if (allUserResutMap == undefined) {
+    var loadingEL = $('#user_main_body');
+    Metronic.blockUI(loadingEL);
+    $.ajax({
+        url: headerUrl + "/monitor/user/queryAllUser",
+        //同步
+        async: false,
+        success: function (resultVO) {
+            Metronic.unblockUI(loadingEL);
+            if (resultVO.success) {
+            	allUserResutMap = resultVO.data;
+            } else {
+                $("#user_main_body").html("加载失败~！原因：" + resultVO.msg);
             }
+        }
 
-        });
-    }
+    });
+//    }
     $('#normalUserSumNumber').html(allUserResutMap.normalUserSum);
     $('#stopUserSumNumber').html(allUserResutMap.stopUserSum);
 

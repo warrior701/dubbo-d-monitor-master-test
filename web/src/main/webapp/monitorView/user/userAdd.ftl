@@ -16,16 +16,16 @@
 						<input type="text" class="form-control" id="userName" name="userName" 
 							   placeholder="请输入用户">
 					</div>
-					<div class="form-group" style="display:none">
-						<!-- 额外增加的内容 -->
+				<!-- 	<div class="form-group" style="display:none">
+						额外增加的内容
 						<form style="display:none">
 						  <input type="password"/>
 						</form>
 						<input type="password" style="width:0;height:0;float:left;visibility:hidden"/>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label for="name">密码</label>
-						<input type="password" class="form-control" id="password" name="password" value=""
+						<input type="text" class="form-control" id="password" name="password" 
 							   placeholder="请输入密码">
 					</div>
 					<div class="form-group">

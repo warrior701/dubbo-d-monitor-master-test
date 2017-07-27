@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -183,11 +184,15 @@ public class UserController {
      */
     @RequestMapping(value = "deleteUser")
     @ResponseBody
-    public ResultVO deleteUser(HttpServletRequest request,Integer Id) {
+    public ResultVO deleteUser(HttpServletRequest request,Integer userId) {
     	Map<String, Object> resultMap = new HashMap<>();
     	try {
-			userManagerService.deleteByPrimaryKey(Id);
-			return ResultVO.wrapSuccessfulResult(resultMap);
+    		if(userId != null){
+        		userManagerService.deleteByPrimaryKey(userId);
+    			return ResultVO.wrapSuccessfulResult(resultMap);
+        	}else{
+        		return ResultVO.wrapErrorResult("用户ID不能为空");
+        	}
 		} catch (Exception e) {
 			e.printStackTrace();
             return ResultVO.wrapErrorResult(e.getMessage());

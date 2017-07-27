@@ -24,26 +24,34 @@ function changeStatus(status) {
 
 //新建用户事件
 function userAdd() {
-	$.ajax({
-		type : 'post',
-		url : '/monitor/user/addUser',
-		data : $('#userAddForm').serialize(),
-		success : function(data) {
-			if (data.success == true) {
-				$("#addSuccessMsg").css("display", "block");
-				setTimeout(function(){
-					userAddExit();
-				}, 2000)
-			} else {
-				$("#addErrMsg").text(data.msg);
+	var checkMsg = checkData();
+	if(checkMsg.length != 0){
+		$("#addErrMsg").text(checkMsg);
+		$("#addErrMsg").css("display", "block");
+	}else{
+		$.ajax({
+			type : 'post',
+			url : '/monitor/user/addUser',
+			data : $('#userAddForm').serialize(),
+			success : function(data) {
+				if (data.success == true) {
+					$("#addErrMsg").css("display", "none");
+					$("#addSuccessMsg").css("display", "block");
+					setTimeout(function(){
+						userAddExit();
+					}, 2000)
+				} else {
+					$("#addErrMsg").text(data.msg);
+					$("#addErrMsg").css("display", "block");
+				}
+			},
+			error : function(data) {
+				$("#addErrMsg").text(data);
 				$("#addErrMsg").css("display", "block");
 			}
-		},
-		error : function(data) {
-			$("#addErrMsg").text(data);
-			$("#addErrMsg").css("display", "block");
-		}
-	});
+		});
+	}
+	
 }
 
 //清空文本框内容
@@ -71,6 +79,31 @@ function userAddExit(){
 	//清空数据
     clearForm($('#userAddForm'));
     $('#userAddModal').modal('hide');
+    
+    //重新加载列表数据
+    document.getElementById("mainIframe").contentWindow.initData();
 }
 
+
+//数据校验
+function checkData(){
+	var userName = $("#userName").val();
+	var password = $("#password").val();
+	var status = $("#status").val();
+	var msg = "";
+	if(userName == null || userName == ""){
+		msg += "、用户名";
+	}
+	if(password == null || password == ""){
+		msg += "、密码";
+	}
+	if(status == null || status == ""){
+		msg += "、状态";
+	}
+	if(msg.length != 0){
+		msg = msg.substring(1,msg.length);
+		msg += "不能为空";
+	}
+	return msg;
+}
 
