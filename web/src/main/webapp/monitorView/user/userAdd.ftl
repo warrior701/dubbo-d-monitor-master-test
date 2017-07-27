@@ -7,7 +7,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" onclick="userAddExit()"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="userAddModalLabel">新增用户</h4>
+				<h4 class="modal-title" id="userAddModalLabel"><span style="color:#65A0D0;font-weight:600">新增用户<span></h4>
 			</div>
 			<div class="modal-body">
 				<form id="userAddForm">
@@ -42,7 +42,7 @@
 								</ul>
 							</div>
 							<input id="statusText" type="text" class="form-control" value="正常" placeholder="请选择状态 " readOnly="true" >
-							<input type="hidden" class="form-control" value="01" id="status" name="status" data-bv-notempty="true">
+							<input type="hidden" class="form-control" value="01" id="status" name="status">
 						</div>
 					</div>
 				</form>

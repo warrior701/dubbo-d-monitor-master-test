@@ -24,7 +24,7 @@ function changeStatus(status) {
 
 //新建用户事件
 function userAdd() {
-	var checkMsg = checkData();
+	var checkMsg = checkAddData();
 	if(checkMsg.length != 0){
 		$("#addErrMsg").text(checkMsg);
 		$("#addErrMsg").css("display", "block");
@@ -86,7 +86,7 @@ function userAddExit(){
 
 
 //数据校验
-function checkData(){
+function checkAddData(){
 	var userName = $("#userName").val();
 	var password = $("#password").val();
 	var status = $("#status").val();

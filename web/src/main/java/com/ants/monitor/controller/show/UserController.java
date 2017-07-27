@@ -159,6 +159,11 @@ public class UserController {
     		if(userInfo != null && userInfo.getUserName() != null && !"".equals(userInfo.getUserName())
         			&& userInfo.getPassword() != null && !"".equals(userInfo.getPassword())
         			&& userInfo.getStatus() != null && !"".equals(userInfo.getStatus())){
+    			//校验重复用户名
+    			SysUserDO user = userManagerService.selectByUserName(userInfo.getUserName());
+    			if(user != null){
+    				return ResultVO.wrapErrorResult("此用户名已经存在");
+    			}
         		Date curDate = new Date();
         		String curUser = request.getSession().getAttribute(MonitorConstants.SESSION_USER_NAME).toString();
         		userInfo.setPassword(MD5Util.MD5(userInfo.getPassword()));
@@ -198,4 +203,57 @@ public class UserController {
             return ResultVO.wrapErrorResult(e.getMessage());
 		}
     }
+    
+    /**
+     * 查询某个用户
+     * @return
+     */
+    @RequestMapping(value = "/queryUserInfo")
+    @ResponseBody
+    public ResultVO queryUserInfo(Integer userId) {
+        try {
+            Map<String, Object> resultMap = new HashMap<>();
+            if(userId != null){
+            	SysUserDO userInfo = userManagerService.selectByPrimaryKey(userId);
+                resultMap.put("userInfo", userInfo);
+                return ResultVO.wrapSuccessfulResult(resultMap);
+        	}else{
+        		return ResultVO.wrapErrorResult("用户ID不能为空");
+        	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultVO.wrapErrorResult(e.getMessage());
+        }
+    }
+    
+    /**
+     * 编辑修改用户
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "editUser")
+    @ResponseBody
+    public ResultVO editUser(HttpServletRequest request, SysUserDO userInfo) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	try {
+    		if(userInfo != null){
+    			Date curDate = new Date();
+        		String curUser = request.getSession().getAttribute(MonitorConstants.SESSION_USER_NAME).toString();
+        		if(userInfo.getPassword() != null && !"".equals(userInfo.getPassword())){
+        			userInfo.setPassword(MD5Util.MD5(userInfo.getPassword()));
+        		}
+    			userInfo.setUpdateBy(curUser);
+    			userInfo.setUpdateDate(curDate);
+        		userManagerService.updateByPrimaryKeySelective(userInfo);
+    			return ResultVO.wrapSuccessfulResult(resultMap);
+        	}else{
+        		return ResultVO.wrapErrorResult("用户不能为空");
+        	}
+		} catch (Exception e) {
+			e.printStackTrace();
+            return ResultVO.wrapErrorResult(e.getMessage());
+		}
+    }
+    
+    
 }

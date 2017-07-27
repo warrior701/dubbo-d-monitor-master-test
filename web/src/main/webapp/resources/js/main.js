@@ -112,11 +112,13 @@ function openAddUserModal(){
 	$("#userAddModal").modal("show");
 }
 //编辑用户
-function editUser(userId){
+function openEditUserModal(userId){
 	$("#userEditModal").modal("show");
+	 //初始化数据
+    initEditData();
 }
 //删除用户
-function deleteUser(userId){
+function openDeleteUserModal(userId){
 	$("#userDeleteModal").modal("show");
 	$("#deleteId").val(userId);
 }

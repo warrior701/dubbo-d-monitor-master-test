@@ -7,7 +7,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" onclick="userDeleteExit()"
 					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="userDeleteModalLabel">系统提示</h4>
+				<h4 class="modal-title" id="userDeleteModalLabel"><span style="color:#65A0D0;font-weight:600">系统提示<span></h4>
 			</div>
 			<div class="modal-body">
 				<div class="form-group" style="font-size:16px;">

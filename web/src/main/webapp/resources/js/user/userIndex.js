@@ -9,7 +9,6 @@ $(function () {
     initData();
     buttonClick();
     inputFunction();
-    selectFunction();
 });
 
 //初始化数据
@@ -17,6 +16,7 @@ function initData() {
 
 //    if (allUserResutMap == undefined) {
     var loadingEL = $('#user_main_body');
+    console.log(loadingEL);
     Metronic.blockUI(loadingEL);
     $.ajax({
         url: headerUrl + "/monitor/user/queryAllUser",
@@ -37,8 +37,8 @@ function initData() {
     $('#stopUserSumNumber').html(allUserResutMap.stopUserSum);
 
     // 拼接所有app数据
-    var edit_html = '<button type="button" class="btn btn-info btn-sm" onclick="editUser(USERID)">编辑</button>';
-    var delete_html = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteUser(USERID)">删除</button>';
+    var edit_html = '<button type="button" class="btn btn-info btn-sm" onclick="openEditUserModal(USERID)">编辑</button>';
+    var delete_html = '<button type="button" class="btn btn-danger btn-sm" onclick="openDeleteUserModal(USERID)">删除</button>';
     var empty_html = '&nbsp;&nbsp;&nbsp;&nbsp;';
 
     var userList = allUserResutMap.userList;
@@ -70,12 +70,12 @@ function openAddUserModal(){
 	window.parent.window.openAddUserModal();
 }
 //编辑用户
-function editUser(userId){
-	window.parent.window.editUser(userId);
+function openEditUserModal(userId){
+	parent.openEditUserModal(userId);
 }
 //删除用户
-function deleteUser(userId){
-	window.parent.window.deleteUser(userId);
+function openDeleteUserModal(userId){
+	window.parent.window.openDeleteUserModal(userId);
 }
 function buttonClick() {
     $(".reload").click(function () {
@@ -90,63 +90,7 @@ function inputFunction() {
         filterUserTable();
         return false;
     });
-    $('#search_user_value').keyup(function () {
-        var key_value = $("#search_user_value").val().trim().toUpperCase();
-        var all_tr = $('#all_service_div > div > div.active>div>table>tbody>tr.service');
-        if (key_value == '') {
-            $(all_tr).removeClass("hidden");
-        } else {
-            $.each(all_tr, function (i, obj) {
-                var value = $(obj).data("servicename").toUpperCase();
-                if (value.indexOf(key_value) == -1) {
-                    $(obj).addClass("hidden");
-                } else {
-                    $(obj).removeClass("hidden");
-                }
-            });
-        }
-        return false;
-    });
 }
-
-// 下拉列表框
-function  selectFunction() {
-    $('#main_category_select').change(function () {
-        var value = $('#main_category_select').val();
-        var all_tr = $('#main_application_tbody > tr');
-        if (value == '-1') {
-            all_tr.removeClass("hidden");
-            return false;
-        }
-        $.each(all_tr, function (i, obj) {
-            var provider_value = $(obj).find(".providers").html();
-            var consumer_value = $(obj).find(".consumers").html();
-            if (value == 'all') {
-                if (provider_value != undefined && consumer_value != undefined) {
-                    $(obj).removeClass("hidden");
-                } else {
-                    $(obj).addClass("hidden");
-                }
-            }
-            if (value == "providers") {
-                if (provider_value != undefined && consumer_value == undefined) {
-                    $(obj).removeClass("hidden");
-                } else {
-                    $(obj).addClass("hidden");
-                }
-            }
-            if (value == "consumers") {
-                if (consumer_value != undefined && provider_value == undefined) {
-                    $(obj).removeClass("hidden");
-                } else {
-                    $(obj).addClass("hidden");
-                }
-            }
-        });
-    });
-}
-
-
 
 // 筛选主表格的userName
 function filterUserTable() {
@@ -156,7 +100,7 @@ function filterUserTable() {
         $(all_tr).removeClass("hidden");
     } else {
         $.each(all_tr, function (i, obj) {
-            var value = $(obj).data("user").toUpperCase();
+            var value = $(obj).data("username").toUpperCase();
             if (value.indexOf(key_value) == -1) {
                 $(obj).addClass("hidden");
             } else {

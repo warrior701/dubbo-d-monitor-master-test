@@ -109,8 +109,8 @@
 				<div class="portlet light tasks-widget">
 					<div class="portlet-title">
 						<div class="tools">
-							<a href="" class="collapse" data-original-title="" title="">
-							</a> <a href="" class="reload" data-original-title="" title=""> </a>
+							<a href="" class="collapse" data-original-title="" title=""></a> 
+							<a href="javascript:void(0)" class="reload" data-original-title="" title="" onclick="initData()"> </a>
 						</div>
 						<span style="font-size: 13px; color: #333333"> 搜索：</span>
 						<div class="inputs" style="float: none;">
