@@ -245,10 +245,12 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script src="${base}/resources/assets/main/js/metronic.js" type="text/javascript"></script>
 <script src="${base}/resources/assets/main/js/layout.js" type="text/javascript"></script>
+<script src="${base}/resources/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/resources/assets/main/js/mustache.js" type="text/javascript"></script>
 <#include "/monitorView/user/userAdd.ftl" />
 <#include "/monitorView/user/userDelete.ftl" />
 <#include "/monitorView/user/userEdit.ftl" />
-<#include "/monitorView/user/userEdit_template.ftl" />
+<#include "/monitorView/user/passwordEdit.ftl" />
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components

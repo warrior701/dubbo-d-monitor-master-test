@@ -160,6 +160,7 @@
 									<tr class="uppercase" style="background-color: #E9ECF3;">
 										<th>用户名</th>
 										<th>状态</th>
+										<th>备注</th>
 										<th>创建人</th>
 										<th>创建时间</th>
 										<th>修改人</th>

@@ -115,7 +115,12 @@ function openAddUserModal(){
 function openEditUserModal(userId){
 	$("#userEditModal").modal("show");
 	 //初始化数据
-    initEditData();
+    initEditData(userId);
+}
+//修改密码
+function openPasswordModal(userId){
+	$("#passwordEditModal").modal("show");
+	$("#passwordId").val(userId);
 }
 //删除用户
 function openDeleteUserModal(userId){

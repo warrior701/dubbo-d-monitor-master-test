@@ -94,17 +94,19 @@ function checkEditData(){
 
 
 //初始化数据
-function initEditData() {
-	alert(11);
-//    var loadingEL = $('#user_edit_modal_body');
+function initEditData(userId) {
+//	alert(11);
+    var loadingEL = parent.$('#user_edit_modal_body');
 //    var resutMap = undefined;
 //    console.log(loadingEL);
 //    Metronic.blockUI(loadingEL);
-	var loadingEL = $('#user_main_body');
+//	var loadingEL = $('#user_main_body');
     console.log(loadingEL);
     Metronic.blockUI(loadingEL);
     $.ajax({
         url: headerUrl + "/monitor/user/queryUserInfo",
+        dataType : "json",
+        data: {"userId":userId},
         //同步
         async: false,
         success: function (resultVO) {
@@ -120,6 +122,7 @@ function initEditData() {
     var user = resutMap.userInfo;
     console.log(user);
     var map = {
+    	user : user,
     	statusTextFunc: function () {
             if(this.status == "00"){
             	return '停用';

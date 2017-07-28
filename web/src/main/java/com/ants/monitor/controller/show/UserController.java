@@ -239,15 +239,41 @@ public class UserController {
     		if(userInfo != null){
     			Date curDate = new Date();
         		String curUser = request.getSession().getAttribute(MonitorConstants.SESSION_USER_NAME).toString();
-        		if(userInfo.getPassword() != null && !"".equals(userInfo.getPassword())){
-        			userInfo.setPassword(MD5Util.MD5(userInfo.getPassword()));
-        		}
     			userInfo.setUpdateBy(curUser);
     			userInfo.setUpdateDate(curDate);
         		userManagerService.updateByPrimaryKeySelective(userInfo);
     			return ResultVO.wrapSuccessfulResult(resultMap);
         	}else{
         		return ResultVO.wrapErrorResult("用户不能为空");
+        	}
+		} catch (Exception e) {
+			e.printStackTrace();
+            return ResultVO.wrapErrorResult(e.getMessage());
+		}
+    }
+    
+    /**
+     * 修改用户密码
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "modifyPassword")
+    @ResponseBody
+    public ResultVO modifyPassword(HttpServletRequest request, Integer userId, String newPassword) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	try {
+    		if( newPassword != null && !"".equals(newPassword) && userId != null ){
+    			Date curDate = new Date();
+        		String curUser = request.getSession().getAttribute(MonitorConstants.SESSION_USER_NAME).toString();
+        		SysUserDO userInfo = new SysUserDO();
+        		userInfo.setUserId(userId);
+        		userInfo.setPassword(MD5Util.MD5(newPassword));
+    			userInfo.setUpdateBy(curUser);
+    			userInfo.setUpdateDate(curDate);
+        		userManagerService.updateByPrimaryKeySelective(userInfo);
+    			return ResultVO.wrapSuccessfulResult(resultMap);
+        	}else{
+        		return ResultVO.wrapErrorResult("新密码、确认密码不能为空");
         	}
 		} catch (Exception e) {
 			e.printStackTrace();

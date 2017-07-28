@@ -12,7 +12,7 @@
 			<div class="modal-body">
 				<form id="userAddForm">
 					<div class="form-group">
-						<label for="name">用户名</label>
+						<label for="name"><span style="color:red">*</span>用户名</label>
 						<input type="text" class="form-control" id="userName" name="userName" 
 							   placeholder="请输入用户">
 					</div>
@@ -24,7 +24,7 @@
 						<input type="password" style="width:0;height:0;float:left;visibility:hidden"/>
 					</div> -->
 					<div class="form-group">
-						<label for="name">密码</label>
+						<label for="name"><span style="color:red">*</span>密码</label>
 						<input type="text" class="form-control" id="password" name="password" 
 							   placeholder="请输入密码">
 					</div>
@@ -33,7 +33,7 @@
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle"
 									data-toggle="dropdown">
-									状态<span class="caret"></span>
+									<span style="color:red">*</span>状态<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
 									<li><a href="javascript:changeStatus('01')">正常</a></li>
@@ -44,6 +44,11 @@
 							<input id="statusText" type="text" class="form-control" value="正常" placeholder="请选择状态 " readOnly="true" >
 							<input type="hidden" class="form-control" value="01" id="status" name="status">
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="name">备注</label>
+						<textarea class="form-control" rows="3" id="note" name="note" style="resize:none;"
+							   placeholder="请输入备注信息"></textarea>
 					</div>
 				</form>
 				<div id="addErrMsg" style="display:none" class="alert alert-danger">错误！请进行一些更改。</div>

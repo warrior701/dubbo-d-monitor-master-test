@@ -26,6 +26,9 @@ public class SysUserDO {
 
     /** 状态 00：删除 01：正常 */
     private String status;
+    
+    /** 备注*/
+    private String note;
 
     /** 创建人 */
     private String createBy;

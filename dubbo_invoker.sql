@@ -47,6 +47,10 @@ COMMENT='用户表';
 ALTER TABLE `monitor`.`dubbo_sys_user`   
   CHANGE `status` `status` CHAR(2) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '01' NULL COMMENT '状态 00：删除 01：正常';
   
+ALTER TABLE `monitor`.`dubbo_sys_user`   
+  ADD COLUMN `note` VARCHAR(128) NULL COMMENT '备注' AFTER `status`;
+
+  
 -- 插入初始管理员账号
 INSERT INTO `monitor`.`dubbo_sys_user` (
   `user_name`,

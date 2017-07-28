@@ -8,6 +8,9 @@
         <td>
             {{{statusFunc}}}
         </td>
+		<td>
+            {{note}}
+        </td>
         <td>
             {{createBy}}
         </td>

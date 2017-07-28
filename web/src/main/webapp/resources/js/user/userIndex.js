@@ -38,6 +38,7 @@ function initData() {
 
     // 拼接所有app数据
     var edit_html = '<button type="button" class="btn btn-info btn-sm" onclick="openEditUserModal(USERID)">编辑</button>';
+    var password_html = '<button type="button" class="btn btn-info btn-sm" onclick="openPasswordModal(USERID)">修改密码</button>';
     var delete_html = '<button type="button" class="btn btn-danger btn-sm" onclick="openDeleteUserModal(USERID)">删除</button>';
     var empty_html = '&nbsp;&nbsp;&nbsp;&nbsp;';
 
@@ -57,7 +58,8 @@ function initData() {
         	var operate_html = '';
         	var edit_button_html = edit_html.replace('USERID', this.userId);
         	var delete_button_html = delete_html.replace('USERID', this.userId);
-        	operate_html = edit_button_html + empty_html + delete_button_html;
+        	var password_button_html = password_html.replace('USERID', this.userId);
+        	operate_html = edit_button_html + empty_html + password_button_html + empty_html + delete_button_html;
             return operate_html;
         }
     };
@@ -72,6 +74,10 @@ function openAddUserModal(){
 //编辑用户
 function openEditUserModal(userId){
 	parent.openEditUserModal(userId);
+}
+//修改密码
+function openPasswordModal(userId){
+	window.parent.window.openPasswordModal(userId);
 }
 //删除用户
 function openDeleteUserModal(userId){
