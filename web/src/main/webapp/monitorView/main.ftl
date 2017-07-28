@@ -251,6 +251,7 @@
 <#include "/monitorView/user/userDelete.ftl" />
 <#include "/monitorView/user/userEdit.ftl" />
 <#include "/monitorView/user/passwordEdit.ftl" />
+<#include "/monitorView/user/userEdit_template.ftl" />
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components

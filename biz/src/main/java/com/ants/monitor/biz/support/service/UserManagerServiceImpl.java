@@ -30,9 +30,12 @@ public class UserManagerServiceImpl implements UserManagerService {
 	@Override
 	public boolean checkUser(String userName, String password) {
 		boolean isSuccess = false;
-		SysUserDO user = sysUserDOMapper.selectByUserName(userName);
-		if(user != null){
-			String pwd = user.getPassword();
+		SysUserDO user = new SysUserDO();
+		user.setStatus("01");
+		user.setUserName(userName);
+		List<SysUserDO> userList = sysUserDOMapper.selectList(user);
+		if(userList.size() > 0){
+			String pwd = userList.get(0).getPassword();
 			if(!StringUtils.isEmpty(pwd) && pwd.toLowerCase().equals(MD5Util.MD5(password).toLowerCase())){
 				log.info("登录成功：" + userName);
 				isSuccess = true;

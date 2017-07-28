@@ -583,7 +583,6 @@ function servicesRelationForceChart(usedApp) {
 
 // 生成art——tps图
 function serviceArtChart(serviceName,methodName, type,success_func){
-    console.log('start');
     if(serviceName =='' || methodName =='' || type =='' ){
         return false;
     }

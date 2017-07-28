@@ -55,8 +55,8 @@ function clearForm(form) {
             this.selectedIndex = -1;
     });
     //赋予默认值
-    $("#statusText").val("正常");
-    $("#status").val("01");
+    $("#editStatusText").val("正常");
+    $("#editStatus").val("01");
 };
 
 //关闭事件
@@ -66,21 +66,20 @@ function userEditExit(){
 	//清空数据
     clearForm($('#userEditForm'));
     $('#userEditModal').modal('hide');
+    
+    //重新加载列表数据
+    document.getElementById("mainIframe").contentWindow.initData();
    
 }
 
 
 //数据校验
 function checkEditData(){
-	var userName = $("#userName").val();
-	var password = $("#password").val();
-	var status = $("#status").val();
+	var userName = $("#editUserName").val();
+	var status = $("#editStatus").val();
 	var msg = "";
 	if(userName == null || userName == ""){
 		msg += "、用户名";
-	}
-	if(password == null || password == ""){
-		msg += "、密码";
 	}
 	if(status == null || status == ""){
 		msg += "、状态";
@@ -92,17 +91,23 @@ function checkEditData(){
 	return msg;
 }
 
+//下拉框事件
+function changeEditStatus(status) {
+	if ("00" == status) {
+		$("#editStatusText").val("停用");
+		$("#editStatus").val(status);
+	} else if ("01" == status) {
+		$("#editStatusText").val("正常");
+		$("#editStatus").val(status);
+	} else {
+		$("#editStatusText").val("未知");
+		$("#editStatus").val("");
+	}
+}
 
 //初始化数据
 function initEditData(userId) {
-//	alert(11);
     var loadingEL = parent.$('#user_edit_modal_body');
-//    var resutMap = undefined;
-//    console.log(loadingEL);
-//    Metronic.blockUI(loadingEL);
-//	var loadingEL = $('#user_main_body');
-    console.log(loadingEL);
-    Metronic.blockUI(loadingEL);
     $.ajax({
         url: headerUrl + "/monitor/user/queryUserInfo",
         dataType : "json",
@@ -120,13 +125,12 @@ function initEditData(userId) {
 
     });
     var user = resutMap.userInfo;
-    console.log(user);
     var map = {
     	user : user,
     	statusTextFunc: function () {
-            if(this.status == "00"){
+            if(user.status == "00"){
             	return '停用';
-            }else if(this.status == "01"){
+            }else if(user.status == "01"){
             	return '正常';
             }else{
             	return '未知';

@@ -21,13 +21,12 @@ function check() {
 			success : function(data) {
 				if (data.success == true) {
 					window.location.href = '/monitor/dash/main';
-					console.log("登录成功,用户名:" + data.data.userName);
 				} else {
 					alert(data.msg);
 				}
 			},
 			error : function(data) {
-				console.log(data);
+				alert(data);
 			}
 		});
 	}

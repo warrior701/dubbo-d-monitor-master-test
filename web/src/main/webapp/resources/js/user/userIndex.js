@@ -16,8 +16,6 @@ function initData() {
 
 //    if (allUserResutMap == undefined) {
     var loadingEL = $('#user_main_body');
-    console.log(loadingEL);
-    Metronic.blockUI(loadingEL);
     $.ajax({
         url: headerUrl + "/monitor/user/queryAllUser",
         //同步
