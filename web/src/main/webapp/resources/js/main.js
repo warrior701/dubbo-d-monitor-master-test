@@ -110,6 +110,9 @@ function logout(){
 //打开新增用户model
 function openAddUserModal(){
 	$("#userAddModal").modal("show");
+	//赋予默认值
+    $("#statusText").val("正常");
+    $("#status").val("01");
 }
 //编辑用户
 function openEditUserModal(userId){
